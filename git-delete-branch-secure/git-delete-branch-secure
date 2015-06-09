@@ -1,0 +1,59 @@
+#!/bin/bash
+
+_delete_confirmation() {
+  while true; do
+    read -p 'Delete (Yes/No/Exit)? (Y/N/E): ' READ_RESULT
+
+    case $READ_RESULT in
+				[yY] )
+					RESULT=y
+					break;
+				;;
+				[nN] )
+					RESULT=n
+					break;
+				;;
+				[eE] )
+					exit;
+				;;
+				* )
+					echo 'Parameter not recognized.'
+				;;
+			esac
+  done
+
+  echo $RESULT
+}
+
+test -z $1 && echo "Branch required." 1>&2 && exit 1
+
+for branch in "$@"
+do
+  echo $branch
+  if [[ ! $branch =~ ^([0-9]{1,})(_|-).+$ ]]; then
+  	echo 'Could not determine the ticket number for branch:' $branch.
+  	echo 'Please delete it manually.'
+  	continue;
+  fi
+
+  ticket_number=${BASH_REMATCH[1]}
+  remote=$(git config branch.$branch.remote)
+  test -z $remote && remote="origin"
+  ref=$(git config branch.$branch.merge)
+  test -z $ref && ref="refs/heads/$branch"
+
+  git_command="git log --grep $ticket_number:"
+  $git_command
+
+  current_branch_commit_number=$($git_command --oneline | wc -l)
+  echo 'Ticket commits in the current branch: ' $current_branch_commit_number
+  branch_commit_number=$($git_command --oneline origin/$branch | wc -l)
+  echo 'Ticket commits in the to be deleted branch (on origin): ' $branch_commit_number
+  confirmation=$(_delete_confirmation)
+
+  if [[ $confirmation == "y" ]]; then
+    git branch -D $branch
+    git branch -d -r $remote/$branch
+    git push $remote :$ref
+  fi
+done
