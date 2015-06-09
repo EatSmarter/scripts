@@ -19,7 +19,7 @@ You can then decide if you want to delete that branch or not or if you want to
 abort the script.
 
 ### Requirements
-1. Git completion needs to be installed and working.
+1. [Git completion](https://github.com/git/git/tree/master/contrib/completion) needs to be installed and working.
 
 2. Branch names should be prefixed with a number followed by either and underscore
   or a hyphen.
