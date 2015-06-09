@@ -47,32 +47,49 @@ abort the script.
 ### Installation
 
 1. Clone the repository
+
   ```
   git clone git@github.com:EatSmarter/scripts.git
   ```
+
 2. Either link the script `git-delete-branch-secure` in a folder that is already
   in your path (for example `/usr/local/bin`:
+
   ```
   ln -s [PATH_TO_REPO]/git-delete-branch-secure/git-delete-branch-secure /usr/local/bin/git-delete-branch-secure
   ```
-  or
+
+  **or**
+
   Put the `git-delete-branch-secure` folder in your path (for example in your
   ~/.bash_profile)
-  ```
+
+  ```bash
   PATH=$PATH:[PATH_TO_REPO]/git-delete-branch-secure
   ```
+
 3. (optional) To make the branch completition work you need to symlink the `/etc
   /bash_completion.d/git-delete-branch-secure` file in your
   `/etc/bash_completion.d/` (or else, check **$BASH_COMPLETION_COMPAT_DIR**
   variable) folder.
+
   ```
   ln -s [PATH_TO_REPO]/git-delete-branch-secure/etc/bash_completion.d/git-delete-branch-secure /etc/bash_completion.d/git-delete-branch-secure
   ```
-  or
+
+  **or**
+
   source the completion file (for example in your ~/.bash_profile)
+
   ```
   source [PATH_TO_REPO]/git-delete-branch-secure/etc/bash_completion.d/git-delete-branch-secure
   ```
+
   The completion works a little different than bash completion. It is wrapped by
   git-completion which requires a function with the appropriate name to be
   defined somewhere in the bash scope.
+
+### Usage
+```
+git delete-branche-secure [BRANCH_NAME] [BRANCH_NAME_2] ...
+```
