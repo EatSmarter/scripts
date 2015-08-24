@@ -134,6 +134,36 @@ Generate an SSH key with a predefined comment and private key file.
 ./generateSSHKey.sh foo@bar.com ~/.ssh/root_server_1
 ```
 
+### addZenDeskSubscriber.php
+
+#### Description
+
+Helps you to add subscriber to a Zendesk organization or subscribe yourself to
+your organization as an end users.
+
+
+#### Requirments
+
+  * php
+  * PHP Curl extension
+  * Zendesk (agent) credentials
+
+
+#### Installation
+
+Not required
+
+
+#### Usage
+
+Get help
+
+```
+php addZenDeskSubscriber.php help
+```
+
+The other commands are explained in the help of the script.
+
 
 # Disclaimer
 
