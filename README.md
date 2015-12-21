@@ -128,7 +128,7 @@ Generate an SSH key with a predefined comment.
 ./generateSSHKey.sh foo@bar.com
 ```
 
-Generate an SSH key with a predefined comment and private key file.
+Generate an SSH key with a predefined comment and private key file destination.
 
 ```
 ./generateSSHKey.sh foo@bar.com ~/.ssh/root_server_1
